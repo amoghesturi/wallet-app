@@ -4,7 +4,7 @@
   "description": "React-Redux app which mocks a wallet",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server"
+    "dev": "webpack-dev-server --hot --history-api-fallback"
   },
   "keywords": [
     "React",
@@ -32,6 +32,9 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-0": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "node-sass": "^4.5.3",
+    "node-sass-chokidar": "0.0.3",
     "path": "^0.12.7",
     "prop-types": "^15.5.10",
     "react": "^15.6.1",

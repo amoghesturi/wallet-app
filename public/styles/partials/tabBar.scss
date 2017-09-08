@@ -1,0 +1,17 @@
+.tab-bar {
+  display: flex;
+  justify-content: flex-start;
+  margin: 0px 50px;
+
+  &-item {
+    font-size: 2em;
+    text-decoration: none;
+    margin: 2px 20px 2px 0px;
+    color: grey;
+
+    &-active {
+      text-decoration: underline;
+      color: $wallet-blue;
+    }
+  }
+}

@@ -1,0 +1,12 @@
+.input-text {
+  font-size: 1em;
+  margin: 5px 50px;
+  height: 50px;
+  border: 0;
+  outline: 0;
+  border-bottom: 1px solid lightgrey;
+
+  &.active {
+    border-bottom-color: $wallet-blue;
+  }
+}

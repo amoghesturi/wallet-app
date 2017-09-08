@@ -22,14 +22,19 @@ const TextInput = () => (
       <Input
         className="input-text"
         type="text"
-        placeholder="Enter your Email/Mobile number"
+        placeholder="Enter your Email"
+      />
+      <Input
+        className="input-text"
+        type="password"
+        placeholder="Mobile number"
       />
       <Input
         className="input-text"
         type="password"
         placeholder="Wallet password"
       />
-      <button className="btn-large">Secure Login</button>
+      <button className="btn-large">Create your Wallet</button>
     </div>
   </div>
 );

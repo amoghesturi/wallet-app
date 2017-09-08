@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const TabBar = props => (
   <div className="tab-bar">
     {
       props.items.map(item => (
-        <Link className="tab-bar-item" to="{item.to}">{item.title}</Link>
+        <NavLink
+          key={item.id}
+          className="tab-bar-item"
+          activeClassName="tab-bar-item-active"
+          to={item.to}
+        >
+          {item.title}
+        </NavLink>
       ))
     }
   </div>
