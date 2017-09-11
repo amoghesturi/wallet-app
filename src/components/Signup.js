@@ -1,4 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
+import Spinner from 'react-spinkit';
+
 import TabBar from './TabBar';
 import Input from './Input';
 
@@ -15,7 +18,7 @@ const tabBarItems = [
   },
 ];
 
-const TextInput = () => (
+const Signup = props => (
   <div className="login">
     <div className="login-wrapper">
       <TabBar items={tabBarItems} />
@@ -34,9 +37,22 @@ const TextInput = () => (
         type="password"
         placeholder="Wallet password"
       />
-      <button className="btn-large">Create your Wallet</button>
+      { props.isFetching && <Spinner name="line-scale-party" color="blue" /> }
+      { !props.isFetching &&
+        <button
+          className="btn-large"
+          onClick={() => props.signupUser('EMAIL', '1234567890', 'PASSWORD')}
+        >
+          Create your Wallet
+        </button>
+      }
     </div>
   </div>
 );
 
-export default TextInput;
+Signup.propTypes = {
+  isFetching: PropTypes.bool.isRequired,
+  signupUser: PropTypes.func.isRequired,
+};
+
+export default Signup;
