@@ -1,8 +1,11 @@
 // Partials
 @import "./partials/variables.scss";
+@import "./partials/typography.scss";
 @import "./partials/tabBar.scss";
 @import "./partials/input.scss";
 @import "./partials/common.scss";
+@import "./partials/navbar.scss";
 
 // Pages
 @import "./pages/login.scss";
+@import "./pages/dashboard.scss";
