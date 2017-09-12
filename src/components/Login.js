@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Spinner from 'react-spinkit';
+import { Field, reduxForm } from 'redux-form';
 
 import TabBar from './TabBar';
 import Input from './Input';
@@ -18,36 +19,59 @@ const tabBarItems = [
   },
 ];
 
-const Login = props => (
-  <div className="login">
-    <div className="login-wrapper">
-      <TabBar items={tabBarItems} />
-      <Input
-        className="input-text"
-        type="text"
-        placeholder="Enter your Email/Mobile number"
-      />
-      <Input
-        className="input-text"
-        type="password"
-        placeholder="Wallet password"
-      />
-      { props.isFetching && <Spinner name="line-scale-party" color="blue" /> }
-      { !props.isFetching &&
-        <button
-          className="btn-large"
-          onClick={() => props.loginUser('EMAIL', 'PASSWORD')}
-        >
-        Secure Login
-        </button>
-      }
+const handleOnSubmit = (e) => {
+  e.preventDefault();
+};
+
+const validate = (values) => {
+  const errors = {};
+  if (!values.email) {
+    errors.email = 'Required';
+  }
+  return errors;
+};
+
+const Login = (props) => {
+  const { isFetching } = props;
+  return (
+    <div className="login">
+      <div className="login-wrapper">
+        <form onSubmit={handleOnSubmit}>
+          <TabBar items={tabBarItems} />
+          <Field
+            className="input-text"
+            component={Input}
+            type="text"
+            name="email"
+            placeholder="Enter your Email/Mobile number"
+          />
+          <Field
+            className="input-text"
+            component={Input}
+            type="password"
+            name="password"
+            placeholder="Wallet password"
+          />
+          { isFetching && <Spinner name="line-scale-party" color="blue" /> }
+          { !isFetching &&
+            <input
+              type="submit"
+              className="btn-large"
+              value="Secure Login"
+            />
+          }
+        </form>
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 Login.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   loginUser: PropTypes.func.isRequired,
 };
 
-export default Login;
+export default reduxForm({
+  form: 'loginForm',
+  validate,
+})(Login);
