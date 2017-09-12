@@ -4,7 +4,7 @@
   "description": "React-Redux app which mocks a wallet",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --hot --history-api-fallback"
+    "dev": "webpack-dev-server -d --hot --history-api-fallback"
   },
   "keywords": [
     "React",
