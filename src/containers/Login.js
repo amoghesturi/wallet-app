@@ -6,6 +6,7 @@ import { loginUser, signupUser } from '../actions/Login';
 
 const mapStateToProps = ({ login }) => ({
   isFetching: login.isFetching,
+  loggedIn: login.loggedIn,
   email: login.email,
   mobile: login.mobile,
 });

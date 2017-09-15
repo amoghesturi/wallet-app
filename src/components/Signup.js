@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Spinner from 'react-spinkit';
+import { Field, reduxForm } from 'redux-form';
 
 import TabBar from './TabBar';
 import Input from './Input';
@@ -18,34 +19,50 @@ const tabBarItems = [
   },
 ];
 
-const Signup = props => (
+const validate = ({ email, mobile, password }) => {
+  const errors = {};
+  if (!email) errors.email = 'Email is required';
+  if (!mobile) errors.mobile = 'Mobile number id required';
+  if (!password || password.length < 8) errors.password = 'Atleast 8 characters required';
+  return errors;
+};
+
+const Signup = ({ signupUser, handleSubmit, isFetching }) => (
   <div className="login">
     <div className="login-wrapper">
-      <TabBar items={tabBarItems} />
-      <Input
-        className="input-text"
-        type="text"
-        placeholder="Enter your Email"
-      />
-      <Input
-        className="input-text"
-        type="password"
-        placeholder="Mobile number"
-      />
-      <Input
-        className="input-text"
-        type="password"
-        placeholder="Wallet password"
-      />
-      { props.isFetching && <Spinner name="line-scale-party" color="blue" /> }
-      { !props.isFetching &&
-        <button
-          className="btn-large"
-          onClick={() => props.signupUser('EMAIL', '1234567890', 'PASSWORD')}
-        >
-          Create your Wallet
-        </button>
-      }
+      <form onSubmit={handleSubmit(({
+        email,
+        mobile,
+        password,
+      }) => signupUser(email, mobile, password))}
+      >
+        <TabBar items={tabBarItems} />
+        <Field
+          className="input-text"
+          component={Input}
+          type="text"
+          name="email"
+          placeholder="Enter your Email"
+        />
+        <Field
+          className="input-text"
+          component={Input}
+          type="password"
+          name="mobile"
+          placeholder="Mobile number"
+        />
+        <Field
+          className="input-text"
+          component={Input}
+          type="password"
+          name="password"
+          placeholder="Wallet password"
+        />
+        { isFetching && <Spinner name="line-scale-party" color="blue" /> }
+        { !isFetching &&
+          <button className="btn-large">Create your Wallet</button>
+        }
+      </form>
     </div>
   </div>
 );
@@ -53,6 +70,10 @@ const Signup = props => (
 Signup.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   signupUser: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
-export default Signup;
+export default reduxForm({
+  form: 'signupForm',
+  validate,
+})(Signup);

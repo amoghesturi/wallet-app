@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Spinner from 'react-spinkit';
 import { Field, reduxForm } from 'redux-form';
+import { Redirect } from 'react-router-dom';
 
 import TabBar from './TabBar';
 import Input from './Input';
@@ -32,7 +33,9 @@ const validate = (values) => {
 };
 
 const Login = (props) => {
-  const { isFetching, loginUser, handleSubmit } = props;
+  const { isFetching, loginUser, handleSubmit, loggedIn } = props;
+  if (loggedIn) return <Redirect to="/dashboard" />;
+
   return (
     <div className="login">
       <div className="login-wrapper">
@@ -72,6 +75,7 @@ const Login = (props) => {
 
 Login.propTypes = {
   isFetching: PropTypes.bool.isRequired,
+  loggedIn: PropTypes.bool.isRequired,
   loginUser: PropTypes.func.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };

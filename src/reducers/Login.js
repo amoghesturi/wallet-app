@@ -9,15 +9,18 @@ import {
 
 const requestLogin = state => Object.assign({}, state, {
   isFetching: true,
+  loggedIn: false,
 });
 
 const receivedLogin = (state, email) => Object.assign({}, state, {
   isFetching: false,
+  loggedIn: true,
   email,
 });
 
 const errorLogin = (state, error) => Object.assign({}, state, {
   isFetching: false,
+  loggedIn: false,
   error,
 });
 
