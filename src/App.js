@@ -9,7 +9,7 @@ import thunkMiddleware from 'redux-thunk';
 import { createLogger } from 'redux-logger';
 
 import { Login, Signup } from './containers/Login';
-import Dashboard from './components/Dashboard';
+import Dashboard from './containers/Dashboard';
 import rootReducer from './reducers';
 
 // Inialize stylles

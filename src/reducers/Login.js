@@ -11,10 +11,9 @@ const requestLogin = state => Object.assign({}, state, {
   isFetching: true,
 });
 
-const receivedLogin = (state, { email, mobile }) => Object.assign({}, state, {
+const receivedLogin = (state, email) => Object.assign({}, state, {
   isFetching: false,
   email,
-  mobile,
 });
 
 const errorLogin = (state, error) => Object.assign({}, state, {

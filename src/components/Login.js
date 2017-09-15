@@ -19,24 +19,28 @@ const tabBarItems = [
   },
 ];
 
-const handleOnSubmit = (e) => {
-  e.preventDefault();
-};
-
 const validate = (values) => {
   const errors = {};
   if (!values.email) {
-    errors.email = 'Required';
+    errors.email = 'Email is required';
+  }
+
+  if (!values.password || values.password.length < 8) {
+    errors.password = 'Password should be at least 8 characters';
   }
   return errors;
 };
 
 const Login = (props) => {
-  const { isFetching } = props;
+  const { isFetching, loginUser, handleSubmit } = props;
   return (
     <div className="login">
       <div className="login-wrapper">
-        <form onSubmit={handleOnSubmit}>
+        <form onSubmit={handleSubmit(({
+          email,
+          password,
+        }) => loginUser(email, password))}
+        >
           <TabBar items={tabBarItems} />
           <Field
             className="input-text"
@@ -69,6 +73,7 @@ const Login = (props) => {
 Login.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   loginUser: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
 };
 
 export default reduxForm({
